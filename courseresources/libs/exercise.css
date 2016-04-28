@@ -1,0 +1,65 @@
+.partnav {
+	list-style-type: none;
+	display: flex;
+	flex-direction: horisontal;
+}
+
+.partnav li {
+	margin-right: 2em;
+}
+
+.partnav li.active {
+	background-color: red;
+	border-radius: 8px;
+}
+
+.exercise > .instruction > *:first-child, .exercise > .apps > div > *:first-child {
+	text-align: center;
+	border: 1px solid black;
+	margin-top: 0;
+}
+
+.exercise {
+	margin: 1em auto;
+	max-width: 700px;
+	background-color: #DDD;
+	padding: 1em;
+}
+
+.instruction {
+	border-bottom: 1px solid black;
+}
+
+#container, .solution {
+	
+}
+
+#container {
+	border-right: 1px solid black;
+}
+
+.apps {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	min-height: 400px;
+}
+
+.apps > div {
+	width: 48%;
+	padding: 5px;
+}
+
+.apps > div:nth-child(2) {
+	border: none;
+	border-left: 2px inset;
+}
+
+.apps > div:nth-child(2) > h4 {
+	margin-bottom: 0;
+}
+
+iframe {
+	border: none;
+	min-height: 400px;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Demo: privatevars</title>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="../libs/browserassets.js"></script>
+	<script type="text/javascript" src="../libs/babel.js"></script>
+	<script type="text/javascript" src="../libs/prism.js"></script>
+	<script type="text/javascript" src="../libs/addsource.js"></script>
+	<script type="text/javascript" src="../libs/sinon.js"></script>
+	<link rel="stylesheet" href="../libs/prism.css">
+	<link rel="stylesheet" href="../libs/demo.css">
+	<link rel="stylesheet" href="../libs/all.css">
+</head>
+<body>
+<div class='topbar'><div>Qlik JavaScript > <a href='../index.html'>Home</a> > <a href='./index.html'>Demos</a> > <span>privatevars</span></div></div>
+<div class="wrapper demowrapper">
+	<div class="demo">
+<button id="clearbtn">Clear</button>
+<button id="btn1">1: Check fridge content</button>
+<button id="btn2">2: Take bottle</button>
+<button id="btn3">3: Spy on fridge object</button>
+
+<script type="text/babel">
+
+function getFridge(initialAmount){
+	var _bottles = initialAmount || 0;
+	return {
+		takeBottle: function(){
+			print("Took bottle from fridge.");
+			_bottles -= 1;
+		},
+		checkFridge: function(){
+			print("There are", _bottles, "bottles in the fridge.");
+		}
+	};
+}
+
+var fridge = getFridge(99);
+
+$("#btn1").click( fridge.checkFridge );
+
+$("#btn2").click( fridge.takeBottle );
+
+$("#btn3").click(function(){
+	print("The fridge props:", Object.keys(fridge));
+});
+
+</script>
+
+	<div id="logs"></div>
+</div>
+	<div id="sourcecode"></div>
+</div>
+	<script type="text/javascript">
+		$(function(){
+			$("#clearbtn").click(function(){
+				$("#logs").empty();
+			});
+		});
+	</script>
+</body>
+</html>

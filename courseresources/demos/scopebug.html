@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Demo: scopebug</title>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="../libs/browserassets.js"></script>
+	<script type="text/javascript" src="../libs/babel.js"></script>
+	<script type="text/javascript" src="../libs/prism.js"></script>
+	<script type="text/javascript" src="../libs/addsource.js"></script>
+	<script type="text/javascript" src="../libs/sinon.js"></script>
+	<link rel="stylesheet" href="../libs/prism.css">
+	<link rel="stylesheet" href="../libs/demo.css">
+	<link rel="stylesheet" href="../libs/all.css">
+</head>
+<body>
+<div class='topbar'><div>Qlik JavaScript > <a href='../index.html'>Home</a> > <a href='./index.html'>Demos</a> > <span>scopebug</span></div></div>
+<div class="wrapper demowrapper">
+	<div class="demo">
+<button id="clearbtn">Clear</button>
+<button id="btn1">Button 1</button>
+<button id="btn2">Button 2</button>
+<button id="btn3">Button 3</button>
+<button id="btn4">Button 4</button>
+<button id="btn5">Button 5</button>
+
+<script type="text/babel">
+
+for (var i=1; i<=5; i++){
+	$("#btn"+i).click(function(){
+		print("Clicked button number "+i);
+	});
+}
+
+</script>
+
+	<div id="logs"></div>
+</div>
+	<div id="sourcecode"></div>
+</div>
+	<script type="text/javascript">
+		$(function(){
+			$("#clearbtn").click(function(){
+				$("#logs").empty();
+			});
+		});
+	</script>
+</body>
+</html>

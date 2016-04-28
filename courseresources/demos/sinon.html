@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Demo: sinon</title>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="../libs/browserassets.js"></script>
+	<script type="text/javascript" src="../libs/babel.js"></script>
+	<script type="text/javascript" src="../libs/prism.js"></script>
+	<script type="text/javascript" src="../libs/addsource.js"></script>
+	<script type="text/javascript" src="../libs/sinon.js"></script>
+	<link rel="stylesheet" href="../libs/prism.css">
+	<link rel="stylesheet" href="../libs/demo.css">
+	<link rel="stylesheet" href="../libs/all.css">
+</head>
+<body>
+<div class='topbar'><div>Qlik JavaScript > <a href='../index.html'>Home</a> > <a href='./index.html'>Demos</a> > <span>sinon</span></div></div>
+<div class="wrapper demowrapper">
+	<div class="demo">
+<button id="clearbtn">Clear</button>
+<button id="btn1">1: call method</button>
+<button id="btn2">2: attach spy</button>
+<button id="btn3">3: query spy</button>
+<button id="btn4">4: remove spy</button>
+
+<script type="text/babel">
+
+var myLib = {
+	method: function(num){
+		print("Doing something complex with the number",num);
+	}
+};
+
+$("#btn1").click(function(){
+	var num =  Math.floor(Math.random()*10)+1;
+	print("Calling the method with", num);
+	myLib.method(num);
+});
+
+$("#btn2").click(function(){
+	if (!myLib.method.restore){
+		print("Attaching spy!");
+		sinon.spy(myLib,"method");
+	} else {
+		print("Spy already in place.");
+	}
+});
+
+$("#btn3").click(function(){
+	if (!myLib.method.restore){
+		print("No spy attached");
+	} else {
+		print("Spy call arguments",myLib.method.args);
+	}
+});
+
+$("#btn4").click(function(){
+	if (!myLib.method.restore){
+		print("No spy to remove!");
+	} else {
+		myLib.method.restore();
+		print("Spy removed.");
+	}
+});
+
+</script>
+
+	<div id="logs"></div>
+</div>
+	<div id="sourcecode"></div>
+</div>
+	<script type="text/javascript">
+		$(function(){
+			$("#clearbtn").click(function(){
+				$("#logs").empty();
+			});
+		});
+	</script>
+</body>
+</html>

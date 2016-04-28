@@ -1,0 +1,34 @@
+
+#sourcecode {
+	tab-size: 4;
+	margin: 1em auto;
+	width: 495px;
+	padding: 1em;
+}
+
+.demo {
+	background-color: #DDD;
+	
+	width: 495px;
+	padding: 1em;
+}
+
+.log {
+	background-color: #d3f0e5;
+	padding: 5px;
+	margin-bottom: 1em;
+	border: 1px solid green;
+}
+
+#logs {
+	clear: both;
+}
+
+#clearbtn {
+	float: right;
+}
+
+button {
+	margin-right: 5px;
+	margin-bottom: 5px;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Demo: inherit_3_mixing</title>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="../libs/browserassets.js"></script>
+	<script type="text/javascript" src="../libs/babel.js"></script>
+	<script type="text/javascript" src="../libs/prism.js"></script>
+	<script type="text/javascript" src="../libs/addsource.js"></script>
+	<script type="text/javascript" src="../libs/sinon.js"></script>
+	<link rel="stylesheet" href="../libs/prism.css">
+	<link rel="stylesheet" href="../libs/demo.css">
+	<link rel="stylesheet" href="../libs/all.css">
+</head>
+<body>
+<div class='topbar'><div>Qlik JavaScript > <a href='../index.html'>Home</a> > <a href='./index.html'>Demos</a> > <span>inherit_3_mixing</span></div></div>
+<div class="wrapper demowrapper">
+	<div class="demo">
+<button id="clearbtn">Clear</button>
+<button id="btn1">1: Scare</button>
+<button id="btn2">2: Take damage</button>
+<button id="btn3">3: Inspect</button>
+
+<script type="text/babel">
+
+
+/******* Setting it up *********/
+
+var entityMethods = {
+	takeDamage: function(hp){
+		this.health = Math.max(0, this.health - hp);
+		print(this.name,"took",hp,"damage, now has",this.health,"health");
+	}
+};
+
+var undeadMethods = {
+	scare: function(){
+		print(this.name,"goes BOOO!");
+	}
+}
+
+
+/******* Trying it out *********/
+
+var skeletor = Object.assign({
+	name: "Skeletor the undead skeleton",
+	health: 10
+},entityMethods,undeadMethods);
+
+$("#btn1").click(function(){
+	skeletor.scare();
+});
+
+$("#btn2").click(function(){
+	skeletor.takeDamage(3);
+});
+
+$("#btn3").click(function(){
+	print("Skeletor's props", Object.keys(skeletor));
+});
+
+</script>
+	<div id="logs"></div>
+</div>
+	<div id="sourcecode"></div>
+</div>
+	<script type="text/javascript">
+		$(function(){
+			$("#clearbtn").click(function(){
+				$("#logs").empty();
+			});
+		});
+	</script>
+</body>
+</html>

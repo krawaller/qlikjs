@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Demo: inherit_1_class</title>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="../libs/browserassets.js"></script>
+	<script type="text/javascript" src="../libs/babel.js"></script>
+	<script type="text/javascript" src="../libs/prism.js"></script>
+	<script type="text/javascript" src="../libs/addsource.js"></script>
+	<script type="text/javascript" src="../libs/sinon.js"></script>
+	<link rel="stylesheet" href="../libs/prism.css">
+	<link rel="stylesheet" href="../libs/demo.css">
+	<link rel="stylesheet" href="../libs/all.css">
+</head>
+<body>
+<div class='topbar'><div>Qlik JavaScript > <a href='../index.html'>Home</a> > <a href='./index.html'>Demos</a> > <span>inherit_1_class</span></div></div>
+<div class="wrapper demowrapper">
+	<div class="demo">
+<button id="clearbtn">Clear</button>
+<button id="btn1">1: Scare</button>
+<button id="btn2">2: Take damage</button>
+<button id="btn3">3: Inspect</button>
+
+<script type="text/babel">
+
+/******* Setting it up *********/
+
+function Entity(name, hp){
+	this.name = name;
+	this.health = hp || 10;
+}
+
+Entity.prototype.takeDamage = function(hp){
+	this.health = Math.max(0, this.health - hp);
+	print(this.name,"took",hp,"damage, now has",this.health,"health");
+}
+
+function Undead(name, hp, type){
+	Entity.call(this, name, hp);
+	this.name = name + " the undead "+type;
+}
+
+Undead.prototype = new Entity();
+
+Undead.prototype.constructor = Undead;
+
+Undead.prototype.scare = function(){
+	print(this.name,"goes BOOO!");
+}
+
+
+/******* Trying it out *********/
+
+
+var skeletor = new Undead("Skeletor", 10, "skeleton");
+
+$("#btn1").click(function(){
+	skeletor.scare();
+});
+
+$("#btn2").click(function(){
+	skeletor.takeDamage(3);
+});
+
+$("#btn3").click(function(){
+	print("Is Skeletor an Undead?", skeletor instanceof Undead);
+	print("Is Skeletor an Entity?", skeletor instanceof Entity);
+	print("Skeletor's props", Object.keys(skeletor));
+});
+
+</script>
+	<div id="logs"></div>
+</div>
+	<div id="sourcecode"></div>
+</div>
+	<script type="text/javascript">
+		$(function(){
+			$("#clearbtn").click(function(){
+				$("#logs").empty();
+			});
+		});
+	</script>
+</body>
+</html>

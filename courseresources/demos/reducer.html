@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Demo: reducer</title>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="../libs/browserassets.js"></script>
+	<script type="text/javascript" src="../libs/babel.js"></script>
+	<script type="text/javascript" src="../libs/prism.js"></script>
+	<script type="text/javascript" src="../libs/addsource.js"></script>
+	<script type="text/javascript" src="../libs/sinon.js"></script>
+	<link rel="stylesheet" href="../libs/prism.css">
+	<link rel="stylesheet" href="../libs/demo.css">
+	<link rel="stylesheet" href="../libs/all.css">
+</head>
+<body>
+<div class='topbar'><div>Qlik JavaScript > <a href='../index.html'>Home</a> > <a href='./index.html'>Demos</a> > <span>reducer</span></div></div>
+<div class="wrapper demowrapper">
+	<div class="demo">
+<button id="clearbtn">Clear</button>
+<button id="btn1">1: Add bucket</button>
+<button id="btn2">2: Add spade</button>
+<button id="btn3">3: Summarise cart</button>
+<button id="btn4">4: Calculate total cost</button>
+<button id="btn5">5: Empty cart</button>
+<button id="btn6">5: All items in cart</button>
+
+<script type="text/babel">
+
+var cart = [],
+	spade = {title: "Spade", cost: 40},
+	bucket = {title: "Bucket", cost: 25};
+
+function buy(obj){
+	var item = Object.assign({
+		discount: +(Math.random()*0.2).toFixed(2)
+	},obj)
+	cart.push(item);
+	print(
+		"You bought a $"+item.cost, item.title,
+		"with a discount of",item.discount
+	);
+}
+
+$("#btn1").click(buy.bind(null,bucket));
+$("#btn2").click(buy.bind(null,spade));
+
+$("#btn3").click(function(){
+	var pertype = cart.reduce(function(mem,item){
+		mem[item.title] = mem[item.title] || {cost: item.cost, qty: 0};
+		mem[item.title].qty += 1;
+		return mem;
+	},{});
+	var summary = _.map(pertype,function(val,key){
+		return val.qty+" "+key+"s";
+	});
+	print("In your cart:", summary);
+});
+
+$("#btn4").click(function(){
+	var total = cart.reduce(function(mem,item){
+		return mem + item.cost * (1-item.discount);
+	},0);
+	print("Total cost:", +total.toFixed(2));
+});
+
+$("#btn5").click(function(){
+	cart = [];
+	print("Cart emptied.")
+});
+
+$("#btn6").click(function(){
+	print("All items in cart:", cart);
+});
+
+</script>
+
+	<div id="logs"></div>
+</div>
+	<div id="sourcecode"></div>
+</div>
+	<script type="text/javascript">
+		$(function(){
+			$("#clearbtn").click(function(){
+				$("#logs").empty();
+			});
+		});
+	</script>
+</body>
+</html>

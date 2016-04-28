@@ -1,0 +1,14 @@
+#test {
+	margin: 1em;
+	border: 1px solid black;
+	padding: 1em;
+	border-radius: 10px;
+}
+
+.success {
+	background-color: #dcf0d5;
+}
+
+.fail {
+	background-color: #f0dbd5;
+}

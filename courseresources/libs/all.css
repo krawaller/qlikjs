@@ -1,0 +1,19 @@
+.topbar {
+	height: 20px;
+	background-color: lightblue;
+}
+
+.topbar > div {
+	margin: 1em auto;
+	max-width: 1000px;	
+}
+
+.wrapper {
+	padding: 1em;
+	margin: 1em auto;
+	max-width: 1000px;
+}
+
+.demowrapper.wrapper {
+	display: flex;
+}

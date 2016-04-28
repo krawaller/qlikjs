@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Demo: mixin</title>
+	<meta charset="UTF-8">
+	<script type="text/javascript" src="../libs/browserassets.js"></script>
+	<script type="text/javascript" src="../libs/babel.js"></script>
+	<script type="text/javascript" src="../libs/prism.js"></script>
+	<script type="text/javascript" src="../libs/addsource.js"></script>
+	<script type="text/javascript" src="../libs/sinon.js"></script>
+	<link rel="stylesheet" href="../libs/prism.css">
+	<link rel="stylesheet" href="../libs/demo.css">
+	<link rel="stylesheet" href="../libs/all.css">
+</head>
+<body>
+<div class='topbar'><div>Qlik JavaScript > <a href='../index.html'>Home</a> > <a href='./index.html'>Demos</a> > <span>mixin</span></div></div>
+<div class="wrapper demowrapper">
+	<div class="demo">
+<button id="clearbtn">Clear</button>
+<button id="checkbtn">Check hero HP</button>
+<button id="hitbtn">Hit hero</button>
+
+<script type="text/babel">
+
+var living = {
+	takeDamage: function(dmg){
+		this.hp = Math.max(this.hp - dmg,0);
+		print(this.name,"took",dmg,"damage!");
+	}
+}
+
+var hero = Object.assign({name: "Hero", hp: 10},living);
+
+$("#checkbtn").click(function(){
+	print("Hero now has",hero.hp,"HP");
+});
+
+$("#hitbtn").click(function(){
+	hero.takeDamage(3);
+});
+
+</script>
+
+	<div id="logs"></div>
+</div>
+	<div id="sourcecode"></div>
+</div>
+	<script type="text/javascript">
+		$(function(){
+			$("#clearbtn").click(function(){
+				$("#logs").empty();
+			});
+		});
+	</script>
+</body>
+</html>
